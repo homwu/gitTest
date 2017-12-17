@@ -1,0 +1,32 @@
+function mytracer_user_view($account,$view_mode,$langcode){
+
+ $global $user;
+
+ if($view_mode <> 'full'){
+   return;
+  }
+  
+ if($account->uid <> 1){ //浏览的id 不是1就不做任何的操作
+  return;
+  }
+
+ //取出放在永久变数中的浏览记录
+ $visits = variable_get('mytracer_user_visits',array());
+ 
+ //建立本次的浏览记录
+  $v= array(
+   'uid' => $user->uid,
+   'time' => time(); 
+  );
+
+ //因为 array 后面的资料可能会被斩掉，
+ //因此，使用array_unshift(),将新的记录放在array()前面
+   array_unshift($visits,$v);
+
+  //只保留 'mytracer_list_max'
+   $list_max=variable_get('mytracer_list_max',5);
+   array_splice($visits,$list_max);
+   
+   variable_set('mytrancer_user_visits',$visits);
+
+}

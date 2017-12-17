@@ -1,0 +1,26 @@
+//建立一个 table
+$header = array('column 1','column 2','column 3','column 4');
+
+$rows = array(
+      array('cell 1','cell 2','cell 3',array('data'=>'cell 4','class'=>'highlight')),
+      array('data'=>array('cell 1','cell 2',array('data'=>'cell 3,4','colspan'=>2)),
+        'class'=>array('funky')
+        )
+   );
+
+
+$output['my_table'][title]= array(
+   '#markup' => '<h3>'.t('my table').'</h3>',
+  )
+
+$output['my_table']['table']= array(
+  '#theme' => 'table',
+  '#header' =>$header,
+  '#rows' =>  #rows,
+ )
+
+dpm($output);
+
+//执行这一段render ,后面的html就出来了
+$html_string = drupal_render($output);
+dpm($html_string);

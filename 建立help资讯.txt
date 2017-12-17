@@ -1,0 +1,28 @@
+localhost://项目名/admin/help/mytracer
+
+function mytracer_help($path,$arg){
+  switch($path){
+   case 'admin/config/people/mytracer':
+     return 'my traceer module help';
+   
+   case 'admin/help#mytracer':
+       $output='';
+       $output.='<p>'."my tracer helps to record";
+       $output.='<p>'."you can see the top record";
+       return $output;
+   }
+
+}
+
+
+
+function mytracer_menu(){
+ $items =array();
+ $items['admin/config/people/mytracer'] =array(
+   'title' =>'my tracer',
+   'description' => '追踪账户浏览',
+   'access arguments' => array('administer my tracer'),
+   'page callback' =>　'drupal_get_form',
+   'page arguments' =>　array('mytracer_admin_form'),
+ )
+}
